@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20">
+	<property name="ireport.zoom" value="1.5"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false" pdfFontName="Times-Bold"/>
+	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false" pdfFontName="Times-Roman"/>
+	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true" pdfFontName="Times-Roman"/>
+	<style name="Detail" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman"/>
+	<style name="Row" mode="Transparent" fontName="Times New Roman" pdfFontName="Times-Roman">
+		<conditionalStyle>
+			<conditionExpression><![CDATA[$V{REPORT_COUNT}%2 == 0]]></conditionExpression>
+			<style mode="Opaque" backcolor="#F0EFEF"/>
+		</conditionalStyle>
+	</style>
+	<parameter name="logo" class="java.io.InputStream">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="tipoProducto" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha1" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="fecha2" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="calibre" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="seleccion" class="java.lang.String">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["C:\\Users\\SISTEMAS\\Dropbox\\UNI MINGO\\INGENIERÍA\\9no Cuatrimestre\\InventariosCuero\\src\\Reportes\\"]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT noPartida, tipoProducto, calibre, seleccion, peso as 'Peso (KG)', noPiezas, AVG(peso/noPiezasActuales) as 'Peso_promedio', descripcion, fecha
+FROM cueroPesado
+WHERE tipoProducto LIKE $P{tipoProducto} AND fecha BETWEEN $P{fecha1} AND $P{fecha2} AND calibre LIKE $P{calibre} AND seleccion LIKE $P{seleccion}
+GROUP BY idCueroPesado;]]>
+	</queryString>
+	<field name="noPartida" class="java.lang.Integer"/>
+	<field name="tipoProducto" class="java.lang.String"/>
+	<field name="calibre" class="java.lang.String"/>
+	<field name="seleccion" class="java.lang.String"/>
+	<field name="Peso (KG)" class="java.lang.Float"/>
+	<field name="Peso_promedio" class="java.lang.Double"/>
+	<field name="descripcion" class="java.lang.String"/>
+	<field name="fecha" class="java.sql.Date"/>
+	<field name="noPiezas" class="java.lang.String"/>
+	<group name="tipoProducto">
+		<groupExpression><![CDATA[$F{tipoProducto}]]></groupExpression>
+		<groupHeader>
+			<band height="58">
+				<frame>
+					<reportElement mode="Opaque" x="0" y="7" width="555" height="48" forecolor="#B89F7D" backcolor="#CCCCFF"/>
+					<textField isStretchWithOverflow="true">
+						<reportElement style="SubTitle" isPrintRepeatedValues="false" x="2" y="0" width="479" height="24" forecolor="#000000" backcolor="#000000"/>
+						<textElement>
+							<font isBold="true"/>
+						</textElement>
+						<textFieldExpression><![CDATA[$F{tipoProducto}]]></textFieldExpression>
+					</textField>
+					<staticText>
+						<reportElement style="Column header" x="247" y="24" width="63" height="18" forecolor="#000000"/>
+						<textElement>
+							<font size="12" isBold="false" isItalic="false"/>
+						</textElement>
+						<text><![CDATA[Peso prom.]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="59" y="24" width="76" height="20"/>
+						<textElement>
+							<font fontName="Times New Roman" size="12" isBold="false" isItalic="false"/>
+						</textElement>
+						<text><![CDATA[Tipo producto]]></text>
+					</staticText>
+					<staticText>
+						<reportElement x="402" y="24" width="79" height="20"/>
+						<textElement>
+							<font fontName="Times New Roman" size="12"/>
+						</textElement>
+						<text><![CDATA[Descripción]]></text>
+					</staticText>
+				</frame>
+				<staticText>
+					<reportElement style="Column header" x="0" y="31" width="59" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="12" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[No. Partida]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="360" y="31" width="42" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="12" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Calibre]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="310" y="31" width="50" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="12" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Selección]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="193" y="31" width="54" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="12" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Peso (KG)]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="135" y="31" width="58" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="12" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[No. Piezas]]></text>
+				</staticText>
+				<staticText>
+					<reportElement style="Column header" x="481" y="31" width="74" height="18" forecolor="#000000"/>
+					<textElement>
+						<font size="12" isBold="false" isItalic="false"/>
+					</textElement>
+					<text><![CDATA[Fecha entrada]]></text>
+				</staticText>
+			</band>
+		</groupHeader>
+		<groupFooter>
+			<band height="6"/>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="81" splitType="Stretch">
+			<frame>
+				<reportElement mode="Opaque" x="0" y="0" width="451" height="46" backcolor="#009900"/>
+				<staticText>
+					<reportElement style="Title" x="17" y="0" width="343" height="46"/>
+					<textElement>
+						<font fontName="Arial" size="24" isBold="false"/>
+					</textElement>
+					<text><![CDATA[Entradas producto pesado]]></text>
+				</staticText>
+			</frame>
+			<frame>
+				<reportElement mode="Opaque" x="0" y="46" width="555" height="26" forecolor="#000000" backcolor="#000099"/>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement x="385" y="6" width="144" height="20" forecolor="#FFFFFF"/>
+					<textElement textAlignment="Right">
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+			</frame>
+			<image>
+				<reportElement x="451" y="0" width="104" height="46"/>
+				<imageExpression><![CDATA[$P{logo}]]></imageExpression>
+			</image>
+		</band>
+	</title>
+	<pageHeader>
+		<band splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="2" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="22" splitType="Stretch">
+			<frame>
+				<reportElement style="Row" mode="Opaque" x="0" y="0" width="555" height="18"/>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="59" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{noPartida}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="193" y="0" width="54" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Peso (KG)}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+					<reportElement style="Detail" positionType="Float" x="481" y="0" width="71" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{fecha}]]></textFieldExpression>
+				</textField>
+				<textField pattern="###0.00">
+					<reportElement x="247" y="0" width="63" height="18"/>
+					<textElement>
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{Peso_promedio}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="310" y="0" width="50" height="18"/>
+					<textElement>
+						<font size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{seleccion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="360" y="0" width="42" height="18"/>
+					<textElement>
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{calibre}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="59" y="0" width="76" height="18"/>
+					<textElement/>
+					<textFieldExpression><![CDATA[$F{tipoProducto}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="402" y="0" width="79" height="18"/>
+					<textElement>
+						<font fontName="Times New Roman" size="12"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{descripcion}]]></textFieldExpression>
+				</textField>
+				<textField>
+					<reportElement x="135" y="0" width="58" height="18"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA[$F{noPiezas}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="7" splitType="Stretch">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="3" width="555" height="1"/>
+				<graphicElement>
+					<pen lineWidth="0.5" lineColor="#999999"/>
+				</graphicElement>
+			</line>
+		</band>
+	</columnFooter>
+	<summary>
+		<band height="802" splitType="Stretch"/>
+	</summary>
+</jasperReport>

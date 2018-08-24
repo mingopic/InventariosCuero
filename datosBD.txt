@@ -1,0 +1,7 @@
+usuarioPC:EQUIPO-PC\SQLEXPRESS
+baseDatos: esmarProd        
+usuario: sa
+password: root
+baseDatosExportar: esmarProd
+puerto: 1433
+BDcompaq: adESMAR20181
