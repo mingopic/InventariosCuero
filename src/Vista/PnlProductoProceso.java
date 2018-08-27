@@ -1480,6 +1480,7 @@ public class PnlProductoProceso extends javax.swing.JPanel {
                         
                         idtc.agregarIdinvDispTrabajar(idt);
                         cpc.modificarProductoPesar(Integer.parseInt(txtNoPiezasCueroInvDisp.getText()), Integer.parseInt(lblIdRegistroInvDisp.getText()), Double.parseDouble(txtKgInvDisp.getText()));
+                        cpc.actualizarProductoPesar(Integer.parseInt(lblIdRegistroInvDisp.getText()), idt);
                         dlgAgregarInvDisponible.setVisible(false);
                         JOptionPane.showMessageDialog(null, "Entrada realizada con éxito");
                         actualizarTablaPesar();

@@ -9,6 +9,7 @@ import static Controlador.SeleccionCommands.c;
 import Modelo.Calibrar;
 import Modelo.CueroPesar;
 import Modelo.CueroSeleccionado;
+import Modelo.InvDispTrabajar;
 import java.net.URL;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -287,6 +288,21 @@ public class CueroPesarCommands {
                 + ", " + cp.getNoPiezasActuales()
                 + ", '" + cp.getDescripcion()
                 +"'";
+        
+        PreparedStatement pstmt = null;
+        cs.conectar();
+        pstmt = cs.getConexion().prepareStatement(query);
+        System.out.println(query);
+        pstmt.executeUpdate();
+        cs.desconectar();
+    }
+    
+    //Método para modificar el noPiezasActuales de la tabla tb_cueroPesado en la base de datos esmarProd
+    public static void actualizarProductoPesar(int idInventario, InvDispTrabajar idt) throws Exception {
+        String query = "exec sp_actCuePesado "
+                + idInventario
+                + ", " + idt.getPeso()
+                + ", " + idt.getNoPiezasActuales();
         
         PreparedStatement pstmt = null;
         cs.conectar();
