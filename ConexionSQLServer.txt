@@ -1,7 +1,7 @@
-usuarioPC:EQUIPO-PC\SQLEXPRESS
+usuarioPC:MINGO-LAPTOP\SQLEXPRESS
 baseDatos: esmarProd        
 usuario: sa
 password: root
 baseDatosExportar: esmarProd
-puerto: 1433
-BDcompaq: adESMAR20181
+puerto: 49991
+BDcompaq: adESMAR2018

@@ -6,10 +6,16 @@
 
 package Controlador;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -22,12 +28,29 @@ public class ConexionMariaDB
     static ResultSet rs = null;
     static ConexionMariaDB c=new ConexionMariaDB();
     private final String imagen="/Reportes/logo_esmar.png";
+    String[] datosBD = null;
     
     public ConexionMariaDB()
     {
         try
         {
-            Class.forName("org.mariadb.jdbc.Driver");
+            datosBD = buscaDatos();
+        }
+        catch (IOException ex)
+        {
+            Logger.getLogger(ConexionSQLServer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        try
+        {
+            if (datosBD[0].equals("mariadb"))
+            {
+                Class.forName("org.mariadb.jdbc.Driver");
+            }
+            else
+            {
+                Class.forName("com.mysql.jdbc.Driver");
+            }
         }
         catch (Exception e)
         {
@@ -38,15 +61,10 @@ public class ConexionMariaDB
     
     
     public void conectar() throws Exception
-    {
-        String usuario = "root";
-//        String contrasenia = "adminesmar";
-        String contrasenia = "root";
-        
+    {   
         //Generamos una conexión solo si no existe alguna ó, si existe y ya está cerrada.
         if (conn == null || conn.isClosed())
-//              conn = DriverManager.getConnection("jdbc:mariadb://192.168.0.3:3307/esmart", usuario, contrasenia);        
-            conn = DriverManager.getConnection("jdbc:mysql://localhost:3307/esmart", usuario, contrasenia);
+              conn = DriverManager.getConnection("jdbc:"+datosBD[0]+"://"+datosBD[1]+":"+datosBD[2]+"/"+datosBD[3], datosBD[4], datosBD[5]);        
     }
     
     public void desconectar() throws Exception 
@@ -57,6 +75,29 @@ public class ConexionMariaDB
     public Connection getConexion()
     {
         return conn;
+    }
+    
+    public String[] buscaDatos() throws FileNotFoundException, IOException {
+        String cadena;
+        String[] datos = new String[6];
+        int j=0;
+        
+        FileReader f = new FileReader("ConexionSQL.txt");
+        BufferedReader b = new BufferedReader(f);
+        while((cadena = b.readLine())!=null) 
+        {
+            String[] palabra = cadena.split(":");
+            
+            for (int i = 0; i < palabra.length; i++) 
+            {
+                datos[j]=palabra[1].replaceAll("^\\s*","");
+            }
+            //System.out.println(datos[j]);
+            j++;
+        }
+        b.close();
+        
+        return datos;
     }
 }
 

@@ -76,7 +76,7 @@ public class ConexionSQLServer
         String[] datos = new String[7];
         int j=0;
         
-        FileReader f = new FileReader("datosBD.txt");
+        FileReader f = new FileReader("ConexionSQLServer.txt");
         BufferedReader b = new BufferedReader(f);
         while((cadena = b.readLine())!=null) 
         {

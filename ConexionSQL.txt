@@ -1,0 +1,6 @@
+jdbc: mariadb
+ip:localhost
+puertoBD: 3307
+baseDatos: esmart
+usuario: root
+password: root
