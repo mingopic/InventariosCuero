@@ -1479,6 +1479,7 @@ public class PnlProductoProceso extends javax.swing.JPanel {
                         idt.setDescripcion(txtDescripcionInvDisp.getText());
                         
                         idtc.agregarIdinvDispTrabajar(idt);
+                        idtc.insertarProductoSemTerPesado(idt, Integer.parseInt(lblIdRegistroInvDisp.getText()));
                         cpc.modificarProductoPesar(Integer.parseInt(txtNoPiezasCueroInvDisp.getText()), Integer.parseInt(lblIdRegistroInvDisp.getText()), Double.parseDouble(txtKgInvDisp.getText()));
                         cpc.actualizarProductoPesar(Integer.parseInt(lblIdRegistroInvDisp.getText()), idt);
                         dlgAgregarInvDisponible.setVisible(false);
