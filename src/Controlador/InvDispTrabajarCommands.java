@@ -107,20 +107,4 @@ public class InvDispTrabajarCommands {
             c.desconectar();
         }
     }
-    
-    //Método para insertar el registro de inventario semiterminado pesado en la base de datos esmarProd
-    public static void insertarProductoSemTerPesado(InvDispTrabajar idt, int idInventario) throws Exception {
-        String query = "exec sp_insSemTerPesado "
-                + idInventario
-                + ", " + idt.getNoPiezas()
-                + ", " + idt.getNoPiezasActuales()
-                + ", " + idt.getPeso();
-        
-        PreparedStatement pstmt = null;
-        cs.conectar();
-        pstmt = cs.getConexion().prepareStatement(query);
-        System.out.println(query);
-        pstmt.executeUpdate();
-        cs.desconectar();
-    }
 }
