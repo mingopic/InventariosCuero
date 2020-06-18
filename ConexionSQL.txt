@@ -1,6 +1,6 @@
 jdbc: mariadb
 ip:localhost
 puertoBD: 3307
-baseDatos: esmart
+baseDatos: esmar
 usuario: root
 password: root
